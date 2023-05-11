@@ -8,20 +8,20 @@ const btnCopiar = document.querySelector(".copiar");
 function removeAccents(text) {
     const sustitutions = {
       àáâãäå: "a",
-      ÀÁÂÃÄÅ: "A",
+      ÀÁÂÃÄÅ: "a",
       èéêë: "e",
-      ÈÉÊË: "E",
+      ÈÉÊË: "e",
       ìíîï: "i",
-      ÌÍÎÏ: "I",
+      ÌÍÎÏ: "i",
       òóôõö: "o",
-      ÒÓÔÕÖ: "O",
+      ÒÓÔÕÖ: "o",
       ùúûü: "u",
-      ÙÚÛÜ: "U",
+      ÙÚÛÜ: "u",
       ýÿ: "y",
-      ÝŸ: "Y",
+      ÝŸ: "y",
       ß: "ss",
       ñ: "n",
-      Ñ: "N"
+      Ñ: "n"
     };
     // Devuelve un valor si 'letter' esta incluido en la clave
     function getLetterReplacement(letter, replacements) {
