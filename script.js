@@ -5,6 +5,38 @@ const mensaje = document.querySelector(".mensaje");
 const caja = document.querySelector(".texto-mensaje");
 const btnCopiar = document.querySelector(".copiar");
 
+function removeAccents(text) {
+    const sustitutions = {
+      àáâãäå: "a",
+      ÀÁÂÃÄÅ: "A",
+      èéêë: "e",
+      ÈÉÊË: "E",
+      ìíîï: "i",
+      ÌÍÎÏ: "I",
+      òóôõö: "o",
+      ÒÓÔÕÖ: "O",
+      ùúûü: "u",
+      ÙÚÛÜ: "U",
+      ýÿ: "y",
+      ÝŸ: "Y",
+      ß: "ss",
+      ñ: "n",
+      Ñ: "N"
+    };
+    // Devuelve un valor si 'letter' esta incluido en la clave
+    function getLetterReplacement(letter, replacements) {
+      const findKey = Object.keys(replacements).reduce(
+        (origin, item, index) => (item.includes(letter) ? item : origin),
+        false
+      );
+      return findKey !== false ? replacements[findKey] : letter;
+    }
+    // Recorre letra por letra en busca de una sustitución
+    return text
+      .split("")
+      .map((letter) => getLetterReplacement(letter, sustitutions))
+      .join("");
+  }
 
 function btnEncriptar() {
     const textoEncriptado = encriptar(textArea.value);
@@ -17,7 +49,6 @@ function btnEncriptar() {
         caja.style.visibility = 'hidden';
         btnCopiar.style.visibility = 'visible';
     }
-
 }
 
 /*
@@ -30,7 +61,7 @@ La letra "u" es convertida para "ufat"
 
 function encriptar(stringEncriptada){
     let matrizCodigo = [["e", "enter"], ["i", "imes"], ["a", "ai"], ["o", "ober"], ["u", "ufat"]]; 
-    stringEncriptada = stringEncriptada.toLowerCase();
+    stringEncriptada = removeAccents(stringEncriptada.toLowerCase());
 
     for(let i = 0; i < matrizCodigo.length; i++){
         if(stringEncriptada.includes(matrizCodigo[i][0])){
@@ -57,7 +88,7 @@ function btnDesencriptar() {
 
 function desencriptar(stringDesencriptada){
     let matrizCodigo = [["e", "enter"], ["i", "imes"], ["a", "ai"], ["o", "ober"], ["u", "ufat"]]; 
-    stringDesencriptada = stringDesencriptada.toLowerCase();
+    stringDesencriptada = removeAccents(stringDesencriptada.toLowerCase());
 
     for(let i = 0; i < matrizCodigo.length; i++){
         if(stringDesencriptada.includes(matrizCodigo[i][1])){
